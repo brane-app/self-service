@@ -1,4 +1,4 @@
-module git.gastrodon.io/imonke/self-service
+module github.com/brane-app/self-service
 
 go 1.13
 
