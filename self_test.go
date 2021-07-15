@@ -48,7 +48,7 @@ func userOK(test *testing.T, fetched map[string]interface{}, target monketype.Us
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
 	user = monketype.NewUser(nick, "", email)
 
 	var err error

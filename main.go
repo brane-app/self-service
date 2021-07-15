@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	monkebase.Connect(os.Getenv("MONKEBASE_CONNECTION"))
+	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
 	groudon.RegisterMiddleware(middleware.MustAuth)
 
 	groudon.RegisterHandler("GET", "^/$", getSelf)
