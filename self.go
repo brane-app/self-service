@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
 
 	"net/http"
 )
@@ -10,8 +10,8 @@ import (
 func getSelf(request *http.Request) (code int, r_map map[string]interface{}, err error) {
 	var requester string = request.Context().Value("requester").(string)
 
-	var who monketype.User
-	if who, _, err = monkebase.ReadSingleUser(requester); err != nil {
+	var who types.User
+	if who, _, err = database.ReadSingleUser(requester); err != nil {
 		return
 	}
 

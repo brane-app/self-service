@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.gastrodon.io/imonke/monkebase"
-	"git.gastrodon.io/imonke/monketype"
+	"github.com/brane-app/database-library"
+	"github.com/brane-app/types-library"
 
 	"context"
 	"net/http"
@@ -16,7 +16,7 @@ const (
 )
 
 var (
-	user monketype.User
+	user types.User
 )
 
 func owned(owner string) (it context.Context) {
@@ -29,7 +29,7 @@ func owned(owner string) (it context.Context) {
 	return
 }
 
-func userOK(test *testing.T, fetched map[string]interface{}, target monketype.User) {
+func userOK(test *testing.T, fetched map[string]interface{}, target types.User) {
 	if fetched["id"].(string) != target.ID {
 		test.Errorf("id mismatch! have: %s, want: %s", fetched["id"], target.ID)
 	}
@@ -48,16 +48,16 @@ func userOK(test *testing.T, fetched map[string]interface{}, target monketype.Us
 }
 
 func TestMain(main *testing.M) {
-	monkebase.Connect(os.Getenv("DATABASE_CONNECTION"))
-	user = monketype.NewUser(nick, "", email)
+	database.Connect(os.Getenv("DATABASE_CONNECTION"))
+	user = types.NewUser(nick, "", email)
 
 	var err error
-	if err = monkebase.WriteUser(user.Map()); err != nil {
+	if err = database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
 
 	var result int = main.Run()
-	monkebase.DeleteUser(user.ID)
+	database.DeleteUser(user.ID)
 	os.Exit(result)
 }
 
