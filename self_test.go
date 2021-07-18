@@ -6,7 +6,6 @@ import (
 
 	"context"
 	"net/http"
-	"os"
 	"testing"
 )
 
@@ -48,17 +47,12 @@ func userOK(test *testing.T, fetched map[string]interface{}, target types.User) 
 }
 
 func TestMain(main *testing.M) {
-	database.Connect(os.Getenv("DATABASE_CONNECTION"))
 	user = types.NewUser(nick, "", email)
 
 	var err error
 	if err = database.WriteUser(user.Map()); err != nil {
 		panic(err)
 	}
-
-	var result int = main.Run()
-	database.DeleteUser(user.ID)
-	os.Exit(result)
 }
 
 func Test_getSelf(test *testing.T) {
