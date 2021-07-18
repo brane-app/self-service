@@ -46,7 +46,7 @@ func userOK(test *testing.T, fetched map[string]interface{}, target types.User) 
 	}
 }
 
-func TestMain(main *testing.M) {
+func setup(main *testing.M) {
 	user = types.NewUser(nick, "", email)
 
 	var err error
